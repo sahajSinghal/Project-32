@@ -16,6 +16,10 @@ class Box {
       var pos =this.body.position;
       var angle = this.body.angle;
       
+      var score = 0
+      textSize(30);
+      text("SCORE: "+score, 780, 40);
+
       if(this.body.speed < 3)
       {
         push(); 
@@ -28,6 +32,7 @@ class Box {
       }
       else
       {
+        score++
         World.remove(world,this.body);
       }
     }

@@ -9,6 +9,9 @@ var block1, block2, block3, block4, block5, block6, block7, block8, block9, bloc
 var black11, block12, block13, block14, block15, block16, block17, block18, block19;
 var striker;
 var rope;
+var score = 0;
+var col;
+var state;
 
 function setup() {
     var canvas = createCanvas(1000,400);
@@ -47,10 +50,16 @@ function setup() {
     striker = new Striker(100,150,60,30);
 
     rope = new SlingShot(striker.body,{x:100,y:50})
+
+    state = "noColor"
 }
 
 function draw() {
-    background(80); 
+    if(state!="noColor")
+    {
+        background(col);
+    }
+    
     rectMode(CENTER);
     Engine.update(engine);
     
@@ -85,7 +94,9 @@ function draw() {
 
     striker.display();
 
-    rope.display();
+    rope.display();  
+    
+    getBackgroundColor()
 }
 
 function mouseDragged(){
@@ -102,5 +113,27 @@ function keyPressed()
     if(keyCode === 32)
     {
         rope.attach(striker.body);
+    }
+}
+
+async function getBackgroundColor()
+{
+    var response = await fetch("http://worldtimeapi.org/api/timezone/Australia/Sydney");
+    var responseJSON = await response.json();
+    console.log(responseJSON);
+    
+    var datetime = responseJSON.datetime;
+    var hour = datetime.slice(11,13);
+    console.log(hour);
+
+    state = "color";
+
+    if(hour >= 6 && hour <= 19)
+    {
+        col = "yellow";
+    }
+    else
+    {
+        col = "red";
     }
 }
