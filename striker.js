@@ -7,7 +7,7 @@ class Striker
             isStatic:false,
             restitution:0.3,
             friction:0.5,
-            density:5
+            density:1
         }
         this.body = Bodies.rectangle(x,y,width,height,options);
         this.width = width;

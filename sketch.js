@@ -44,7 +44,7 @@ function setup() {
 
     block19 = new Box(745,110,60,60);
 
-    striker = new Striker(100,150,30,40);
+    striker = new Striker(100,150,60,30);
 
     rope = new SlingShot(striker.body,{x:100,y:50})
 }
@@ -95,4 +95,12 @@ function mouseDragged(){
 
 function mouseReleased(){
     rope.fly();
+}
+
+function keyPressed()
+{
+    if(keyCode === 32)
+    {
+        rope.attach(striker.body);
+    }
 }
